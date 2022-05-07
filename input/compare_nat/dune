@@ -1,0 +1,4 @@
+(executables
+ (names compare_nat1_1)
+ (public_names compare_nat1_1)
+ (libraries system))
