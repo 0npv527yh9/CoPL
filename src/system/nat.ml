@@ -38,7 +38,7 @@ let rec derive bin_op =
   | Bin_op (Plus, S n1, n2) ->
       let t = derive (Bin_op (Plus, n1, n2)) in
       let n = result_of_judgement (root_of_tree t) in
-      Tree (J_is (bin_op, n), P_Succ, [t])
+      Tree (J_is (bin_op, S n), P_Succ, [t])
   | Bin_op (Times, Z, _) -> Tree (J_is (bin_op, Z), T_Zero, [])
   | Bin_op (Times, S n1, n2) ->
       let t1 = derive (Bin_op (Times, n1, n2)) in
