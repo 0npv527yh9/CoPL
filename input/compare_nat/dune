@@ -1,4 +1,4 @@
 (executables
- (names compare_nat1_1 compare_nat2_1 compare_nat3_1)
- (public_names compare_nat1_1 compare_nat2_1 compare_nat3_1)
+ (names compare_nat1_1 compare_nat2_1 compare_nat3_1 compare_nat1_2)
+ (public_names compare_nat1_1 compare_nat2_1 compare_nat3_1 compare_nat1_2)
  (libraries system))
