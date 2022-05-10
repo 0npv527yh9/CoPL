@@ -1,0 +1,10 @@
+(executables
+ (names
+  reduce_nat_exp_1
+  reduce_nat_exp_2
+  reduce_nat_exp_4)
+ (public_names
+  reduce_nat_exp_1
+  reduce_nat_exp_2
+  reduce_nat_exp_4)
+ (libraries system))
