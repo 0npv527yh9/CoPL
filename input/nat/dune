@@ -1,4 +1,0 @@
-(executables
- (names nat_1 nat_2 nat_3 nat_4 nat_5 nat_6 nat_7 nat_8)
- (public_names nat_1 nat_2 nat_3 nat_4 nat_5 nat_6 nat_7 nat_8)
- (libraries system))
