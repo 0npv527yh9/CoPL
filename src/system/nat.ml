@@ -32,17 +32,19 @@ open Tree
 
 let result_of_judgement = function J_is (_, n) -> n
 
-let rec derive bin_op =
+let rec derive_bin_op bin_op =
   match bin_op with
   | Bin_op (Plus, Z, n) -> Tree (J_is (bin_op, n), P_Zero, [])
   | Bin_op (Plus, S n1, n2) ->
-      let t = derive (Bin_op (Plus, n1, n2)) in
+      let t = derive_bin_op (Bin_op (Plus, n1, n2)) in
       let n = result_of_judgement (root_of_tree t) in
       Tree (J_is (bin_op, S n), P_Succ, [t])
   | Bin_op (Times, Z, _) -> Tree (J_is (bin_op, Z), T_Zero, [])
   | Bin_op (Times, S n1, n2) ->
-      let t1 = derive (Bin_op (Times, n1, n2)) in
+      let t1 = derive_bin_op (Bin_op (Times, n1, n2)) in
       let n3 = result_of_judgement (root_of_tree t1) in
-      let t2 = derive (Bin_op (Plus, n2, n3)) in
+      let t2 = derive_bin_op (Bin_op (Plus, n2, n3)) in
       let n4 = result_of_judgement (root_of_tree t2) in
       Tree (J_is (bin_op, n4), T_Succ, [t1; t2])
+
+let derive = function J_is (bin_op, _) -> derive_bin_op bin_op

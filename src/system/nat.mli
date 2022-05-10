@@ -22,7 +22,7 @@ module Tree :
     type tree =
       Core.Derivation_tree.Make(Nat).tree =
         Tree of node * Nat.rule * tree list
-    val root_of_tree : tree -> Nat.judgement
+    val root_of_tree : tree -> node
     val string_of_tree : tree -> string
   end
-val derive : Nat.bin_op -> Tree.tree
+val derive : Nat.judgement -> Tree.tree
