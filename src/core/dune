@@ -1,3 +1,7 @@
 (library
  (name core)
 )
+
+(env
+  (dev
+    (flags (:standard -warn-error -A))))

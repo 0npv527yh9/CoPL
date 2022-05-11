@@ -1,8 +1,7 @@
-open System.Compare_nat1
-open Compare_nat1
+open System.Nat
 
 let () =
-  let judgement = J_less (S (S Z), S (S (S Z))) in
+  let judgement = Parser.toplevel Lexer.token (Lexing.from_channel stdin) in
   let tree = derive judgement in
   let s = Tree.string_of_tree tree in
   print_endline s

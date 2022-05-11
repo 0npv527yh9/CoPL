@@ -1,7 +1,8 @@
-module Nat = struct
-  type nat = Z | S of nat
-  type op = Plus | Times
-  type bin_op = Bin_op of op * nat * nat
+type nat = Z | S of nat
+type op = Plus | Times
+type bin_op = Bin_op of op * nat * nat
+
+module System = struct
   type judgement = J_is of bin_op * nat
   type rule = P_Zero | P_Succ | T_Zero | T_Succ
 
@@ -26,7 +27,8 @@ module Nat = struct
   let string_of_rule = String.of_rule
 end
 
-module Tree = Core.Derivation_tree.Make (Nat)
+module Tree = Core.Derivation_tree.Make (System)
+
 open Nat
 open Tree
 

@@ -1,0 +1,15 @@
+(menhir
+ (modules parser)
+)
+(ocamllex
+ (modules lexer)
+)
+
+(executable
+ (name main)
+ (public_name compare_nat3)
+ (libraries system))
+
+(env
+  (dev
+    (flags (:standard -warn-error -A))))

@@ -14,3 +14,7 @@
   eval_ml1_5
   eval_ml1_6)
  (libraries system))
+
+(env
+  (dev
+    (flags (:standard -warn-error -A))))

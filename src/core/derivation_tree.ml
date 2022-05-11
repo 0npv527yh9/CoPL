@@ -1,19 +1,28 @@
-open System
+open Judgement
 
-module Make (System : System) = struct
+module type Tree = sig
+  type node
+  type tree
+
+  val root_of_tree : tree -> node
+  val string_of_tree : tree -> string
+end
+
+module Make (Judgement : Judgement) : Tree = struct
   open Pprint
+  open Judgement
 
-  type node = System.judgement
-  type tree = Tree of System.judgement * System.rule * tree list
+  type node = judgement
+  type tree = Tree of judgement * rule * tree list
 
-  let root_of_tree = function Tree (judgement, _, _) -> judgement
+  let root_of_tree = function Tree (node, _, _) -> node
 
   let rec token_list_of_tree = function
     | Tree (judgement, rule, subtree_list) ->
         let head =
           Line
-            ( System.string_of_judgement judgement
-            ^ " by " ^ System.string_of_rule rule ^ " {" ) in
+            (string_of_judgement judgement ^ " by " ^ string_of_rule rule ^ " {")
+        in
         let body = token_list_of_tree_list [] subtree_list in
         let tail = Line "}" in
         (head :: Indent :: body) @ [Unindent; tail]

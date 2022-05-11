@@ -1,4 +1,4 @@
-module type System = sig
+module type Judgement = sig
   type judgement
   type rule
 

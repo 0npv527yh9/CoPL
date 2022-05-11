@@ -14,3 +14,7 @@
   eval_nat_exp_5
   eval_nat_exp_6)
  (libraries system))
+
+(env
+  (dev
+    (flags (:standard -warn-error -A))))

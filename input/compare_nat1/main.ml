@@ -1,5 +1,4 @@
-open System.Nat
-open Parsing
+open System.Compare_nat1
 
 let () =
   let judgement = Parser.toplevel Lexer.token (Lexing.from_channel stdin) in
