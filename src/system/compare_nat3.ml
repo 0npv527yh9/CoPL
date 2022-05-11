@@ -1,4 +1,4 @@
-module Compare_nat3 = struct
+module System = struct
   type nat = Z | S of nat
   type judgement = J_less of nat * nat
   type rule = L_Succ | L_SuccR
@@ -16,8 +16,8 @@ module Compare_nat3 = struct
   let string_of_rule = String.of_rule
 end
 
-module Tree = Core.Derivation_tree.Make (Compare_nat3)
-open Compare_nat3
+module Tree = Core.Derivation_tree.Make (System)
+open System
 open Tree
 
 let rec derive judgement =

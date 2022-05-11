@@ -1,5 +1,5 @@
 %{
-open System.Compare_nat3.Compare_nat3
+open System.Compare_nat3.System
 %}
 
 %token S Z
