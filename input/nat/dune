@@ -9,7 +9,3 @@
  (name main)
  (public_name nat)
  (libraries system))
-
-(env
-  (dev
-    (flags (:standard -warn-error -A))))

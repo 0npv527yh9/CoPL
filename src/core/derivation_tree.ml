@@ -1,16 +1,8 @@
-open Judgement
+open System
 
-module type Tree = sig
-  type node
-  type tree
-
-  val root_of_tree : tree -> node
-  val string_of_tree : tree -> string
-end
-
-module Make (Judgement : Judgement) : Tree = struct
+module Make (System : System) = struct
   open Pprint
-  open Judgement
+  open System
 
   type node = judgement
   type tree = Tree of judgement * rule * tree list

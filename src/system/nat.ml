@@ -1,8 +1,7 @@
-type nat = Z | S of nat
-type op = Plus | Times
-type bin_op = Bin_op of op * nat * nat
-
 module System = struct
+  type nat = Z | S of nat
+  type op = Plus | Times
+  type bin_op = Bin_op of op * nat * nat
   type judgement = J_is of bin_op * nat
   type rule = P_Zero | P_Succ | T_Zero | T_Succ
 
@@ -28,8 +27,7 @@ module System = struct
 end
 
 module Tree = Core.Derivation_tree.Make (System)
-
-open Nat
+open System
 open Tree
 
 let result_of_judgement = function J_is (_, n) -> n

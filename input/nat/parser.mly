@@ -1,5 +1,5 @@
 %{
-open System.Nat.Nat
+open System.Nat.System
 %}
 
 %token S Z
@@ -12,16 +12,13 @@ open System.Nat.Nat
 
 toplevel:
     | j=judgement EOL                { j }
-;
 
 judgement:
     | n1=nat op=op n2=nat IS n3=nat { J_is(Bin_op(op, n1, n2), n3) }
-;
 
 nat:
     | Z     { Z }
     | S atom { S $2 }
-;
 
 atom:
     | Z { Z }
