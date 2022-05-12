@@ -14,7 +14,7 @@ toplevel:
     | j=judgement EOL                { j }
 
 judgement:
-    | n1=nat op=op n2=nat IS n3=nat { J_is(Bin_op(op, n1, n2), n3) }
+    | n1=nat op=op n2=nat IS n3=nat { J_is(BinOp(op, n1, n2), n3) }
 
 nat:
     | Z     { Z }
