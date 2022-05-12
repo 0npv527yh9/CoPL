@@ -1,20 +1,11 @@
-(executables
- (names
-  eval_nat_exp_1
-  eval_nat_exp_2
-  eval_nat_exp_3
-  eval_nat_exp_4
-  eval_nat_exp_5
-  eval_nat_exp_6)
- (public_names
-  eval_nat_exp_1
-  eval_nat_exp_2
-  eval_nat_exp_3
-  eval_nat_exp_4
-  eval_nat_exp_5
-  eval_nat_exp_6)
- (libraries system))
+(menhir
+ (modules parser)
+)
+(ocamllex
+ (modules lexer)
+)
 
-(env
-  (dev
-    (flags (:standard -warn-error -A))))
+(executable
+ (name main)
+ (public_name eval_nat_exp)
+ (libraries system))
