@@ -1,10 +1,11 @@
-(executables
- (names
-  reduce_nat_exp_1
-  reduce_nat_exp_2
-  reduce_nat_exp_4)
- (public_names
-  reduce_nat_exp_1
-  reduce_nat_exp_2
-  reduce_nat_exp_4)
+(menhir
+ (modules parser)
+)
+(ocamllex
+ (modules lexer)
+)
+
+(executable
+ (name main)
+ (public_name reduce_nat_exp)
  (libraries system))
