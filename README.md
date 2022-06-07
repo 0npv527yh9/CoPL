@@ -35,3 +35,7 @@ if 3 < 4 then 1 < true else 3 - false evalto error by E-IfTError {
 # EvalML2
 - [x] 環境の実装: `variable * value list`
 - [ ] `|-` の名前: `PROVE`
+
+# EvalML3
+- [x] 改行でパースが終了してしまう
+- [ ] E-IfFの文字列がE-IfTになっていたので，Eval1やEval2でも間違っているはず
