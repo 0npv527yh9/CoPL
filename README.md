@@ -42,3 +42,12 @@ if 3 < 4 then 1 < true else 3 - false evalto error by E-IfTError {
 
 # NamelessML3
 - [ ] judgementの名前
+
+# EvalML4
+- parser
+    - [ ] 2項演算の右側にできるだけ伸ばす式が来た時の対処で，special_expがif_expになっていた
+    - [ ] 過去のsystemもそう？
+- [ ] Lt式の文字列表現で，右側にifが来たらかっこつけるようになってたが，いらない．過去のsystemもそう
+- [ ] ConsをBinOpにすべきかどうか．教科書の定義上，2項演算になってない
+- [ ] 文字列表現のかっこづけが全体的におかしい
+    -　少し直した

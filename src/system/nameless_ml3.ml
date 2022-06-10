@@ -101,7 +101,7 @@ module System = struct
           "let rec " ^ f ^ " = fun " ^ x ^ " -> " ^ of_exp e1 ^ " in "
           ^ of_exp e2
 
-    let rec of_dbexp = function
+  let rec of_dbexp = function
       | DB_int i -> string_of_int i
       | DB_bool b -> string_of_bool b
       | DB_var i -> "#" ^ string_of_int i
