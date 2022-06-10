@@ -51,3 +51,6 @@ if 3 < 4 then 1 < true else 3 - false evalto error by E-IfTError {
 - [ ] ConsをBinOpにすべきかどうか．教科書の定義上，2項演算になってない
 - [ ] 文字列表現のかっこづけが全体的におかしい
     -　少し直した
+
+# EvalML5
+- rulebook.pdf: $res \in \mathbf{Res} ::= \mathcal E \mid F$は使わない？
