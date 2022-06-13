@@ -34,11 +34,6 @@ module System = struct
     | S n' -> S (one_subst_nat (i, n) n')
     | V i' -> if i = i' then n else V i'
 
-  (* one_subst_t にしたほうがいい？ *)
-  let one_subst_eqs s eqs =
-    let f = one_subst_nat s in
-    List.rev_map (fun (t1, t2) -> (f t1, f t2)) eqs
-
   let rec unify = function
     | [] -> []
     | (n, n') :: eqs -> (
@@ -46,7 +41,9 @@ module System = struct
         else
           match (n, n') with
           | S n, S n' -> unify ((n, n') :: eqs)
-          | n, V i | V i, n -> (i, n) :: unify (one_subst_eqs (i, n) eqs)
+          | n, V i | V i, n ->
+              let f = one_subst_nat (i, n) in
+              (i, n) :: unify (List.rev_map (fun (t1, t2) -> (f t1, f t2)) eqs)
           | _ -> assert false )
 
   let one_subst_judgement s = function
