@@ -54,3 +54,4 @@ if 3 < 4 then 1 < true else 3 - false evalto error by E-IfTError {
 
 # EvalML5
 - rulebook.pdf: $res \in \mathbf{Res} ::= \mathcal E \mid F$は使わない？
+- [x] あとは，lexerとparserだけ

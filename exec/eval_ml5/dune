@@ -1,0 +1,11 @@
+(menhir
+ (modules parser)
+)
+(ocamllex
+ (modules lexer)
+)
+
+(executable
+ (name main)
+ (public_name eval_ml5)
+ (libraries system))
