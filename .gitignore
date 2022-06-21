@@ -8,6 +8,8 @@
 *.cmxs
 *.cmxa
 *.copl
+*.json
+*.pickle
 
 # ocamlbuild working directory
 _build/
