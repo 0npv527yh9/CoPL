@@ -55,3 +55,13 @@ if 3 < 4 then 1 < true else 3 - false evalto error by E-IfTError {
 # EvalML5
 - rulebook.pdf: $res \in \mathbf{Res} ::= \mathcal E \mid F$は使わない？
 - [x] あとは，lexerとparserだけ
+
+# TypingML4
+- [x] 型推論がおかしい
+- [x] リストの型推論かparserがおかしい 
+- [x] 自由型変数が残ったとき，いずれかの型を任意に選ぶ
+
+# General
+- [ ] 結合の強弱はvariant型のコンストラクタ不等式で表現できそう
+- [ ] 自動テスト
+    - [ ] 失敗したときの例外処理
