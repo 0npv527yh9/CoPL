@@ -3,8 +3,8 @@ open Parser
 exception Eof
 }
 rule token = parse
-    | [' ']    { token lexbuf } 
-    | ['\n' ]  { EOL }
+    | "\n\n" | [ ';' ]  { EOL }
+    | [' ' '\n' ]    { token lexbuf } 
     | "-"? ['0'-'9']+ { VINT (int_of_string (Lexing.lexeme lexbuf)) }
     | "true" { VBOOL true }
     | "false" { VBOOL false}

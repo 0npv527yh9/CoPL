@@ -3,8 +3,8 @@ open Parser
 exception Eof
 }
 rule token = parse
-    | [' ']     { token lexbuf } 
-    | ['\n' ]        { EOL }
+    | "\n\n" | [ ';' ]  { EOL }
+    | [' ' '\n' ]    { token lexbuf } 
     | 'S' { S }
     | 'Z' { Z }
     | "is" { IS }
