@@ -12,7 +12,7 @@ from urllib3.exceptions import InsecureRequestWarning
 
 
 def main():
-    session = CoPLSession()
+    session = CoPLSession(True)
     session.test(*map(int, sys.argv[1:]))
 
 
@@ -105,7 +105,7 @@ class CoPLSession(Session):
         judgement = self.soup.select_one('pre[id=question]').text
         cmd = f'./_build/default/exec/{system}/main.exe'
         return subprocess.run(
-            cmd, text = True, capture_output = True, input = judgement + ';'
+            cmd, text = True, capture_output = True, input = judgement + ';;'
         )
 
 
