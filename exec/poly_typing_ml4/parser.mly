@@ -1,4 +1,5 @@
 %{
+let to_var alpha = int_of_char (String.get alpha 0) - int_of_char 'a'
 open System.Poly_typing_ml4.System
 %}
 

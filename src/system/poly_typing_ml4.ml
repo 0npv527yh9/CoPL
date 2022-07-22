@@ -1,6 +1,4 @@
 module System = struct
-  let to_var alpha = int_of_char (String.get alpha 0) - int_of_char 'a'
-
   type op = Plus | Minus | Times | Lt
 
   type var = string
@@ -70,28 +68,6 @@ module System = struct
   module String = struct
     let of_op = function Plus -> "+" | Minus -> "-" | Times -> "*" | Lt -> "<"
 
-    (* int -> int *)
-    (* var -> char *)
-    (*
-         let cnt = ref 0
-
-         let rec rename_type l = function
-           | T_bool | T_int -> l
-           | T_fun (t1, t2) -> rename_type (rename_type l t1) t2
-           | T_list t -> rename_type l t
-           | V i ->
-               if List.mem_assoc i l then l
-               else
-                 let x = (i, !cnt) in
-                 cnt := !cnt + 1;
-                 x :: l
-
-         let rec rename_env l = function
-           | [] -> l
-           | (_, (_, t)) :: env -> rename_env (rename_type l t) env
-
-         let rename_env l env = rename_env l (List.rev env) *)
-
     let rec of_type = function
       | T_bool -> "bool"
       | T_int -> "int"
@@ -109,37 +85,18 @@ module System = struct
           let j = i / 26 in
           let n = if j = 0 then "" else string_of_int j in
           "'" ^ Char.escaped (char_of_int (int_of_char 'a' + (i mod 26))) ^ n
-    (* (char_of_int (int_of_char 'a' + List.assoc i id_num_list)) *)
 
     let rec of_vars = function
       | [] -> []
-      | i :: vars ->
-          let j = i / 26 in
-          let n = if j = 0 then "" else string_of_int j in
-          ("'" ^ Char.escaped (char_of_int (int_of_char 'a' + (i mod 26))) ^ n)
-          :: of_vars vars
+      | i :: vars -> of_type (V i) :: of_vars vars
 
     let of_tysc (vars, t) =
-      (* let id_num_list = rename t in
-         let vars =
-           List.map
-             (fun i ->
-               try List.assoc i id_num_list
-               with _ ->
-                 print_endline (String.concat " " (of_vars vars));
-                 print_endline (of_type id_num_list t);
-                 assert false)
-             vars
-         in *)
       let q =
         match vars with
         | [] -> ""
         | vars -> String.concat " " (of_vars vars) ^ "."
       in
       q ^ of_type t
-    (* q ^ of_type id_num_list t *)
-
-    (* let of_type t = of_type (rename t) t *)
 
     let rec paren_special = function
       | ( E_if _ | E_let _ | E_fun _ | E_app _ | E_letrec _ | E_cons _
@@ -433,5 +390,4 @@ let rec derive_type e env =
 
 let derive = function
   | J_typing (env, e, _) -> (
-      (* match derive_type e env with tree, _-> tree) *)
       match derive_type e env with tree, substs -> subst_tree substs tree)
