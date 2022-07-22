@@ -35,6 +35,7 @@ class CoPLSession(Session):
 
     def __del__(self):
         self.save_cookies()
+        print('saved')
 
     def login(self):
         with open('config.json') as f:
