@@ -86,9 +86,7 @@ module System = struct
           let n = if j = 0 then "" else string_of_int j in
           "'" ^ Char.escaped (char_of_int (int_of_char 'a' + (i mod 26))) ^ n
 
-    let rec of_vars = function
-      | [] -> []
-      | i :: vars -> of_type (V i) :: of_vars vars
+    let of_vars = List.map (fun i -> of_type (V i))
 
     let of_tysc (vars, t) =
       let q =
@@ -388,6 +386,65 @@ let rec derive_type e env =
       let substs = unify eqs in
       (Tree (J_typing (env, e, t2), T_Match, [ tr1; tr2; tr3 ]), substs)
 
+let rec rename_type table = function
+  | (T_int | T_bool) as t -> (t, table)
+  | T_fun (t1, t2) ->
+      let t1, table = rename_type table t1 in
+      let t2, table = rename_type table t2 in
+      (T_fun (t1, t2), table)
+  | T_list t ->
+      let t, table = rename_type table t in
+      (T_list t, table)
+  | V i ->
+      if List.mem_assoc i table then (V (List.assoc i table), table)
+      else
+        let j = List.length table in
+        let table = (i, j) :: table in
+        (V j, table)
+
+let rename_vars table vars =
+  List.map
+    (fun i ->
+      match rename_type table (V i) with V j, _ -> j | _ -> assert false)
+    vars
+
+let rename_tysc table = function
+  | vars, t ->
+      let t, table = rename_type table t in
+      let vars = rename_vars table vars in
+      (vars, t)
+
+let rename_env table env =
+  List.map
+    (fun (x, tysc) ->
+      ( x,
+        let tysc = rename_tysc table tysc in
+        tysc ))
+    env
+
+let rename_judgement table = function
+  | J_typing (env, e, t) ->
+      let t, table = rename_type table t in
+      let env = rename_env table env in
+      (J_typing (env, e, t), table)
+
+let rec rename_tree table = function
+  | Tree (j, r, ts) ->
+      let j, table = rename_judgement table j in
+      let rec aux table = function
+        | [] -> ([], table)
+        | t :: ts ->
+            let t, table = rename_tree table t in
+            let ts, table = aux table ts in
+            (t :: ts, table)
+      in
+      let ts, table = aux table ts in
+      (Tree (j, r, ts), table)
+
 let derive = function
   | J_typing (env, e, _) -> (
-      match derive_type e env with tree, substs -> subst_tree substs tree)
+      match derive_type e env with
+      | tree, substs ->
+          let tree = subst_tree substs tree in
+          let tree, _ = rename_tree [] tree in
+          tree)
