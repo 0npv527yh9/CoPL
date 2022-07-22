@@ -65,3 +65,4 @@ if 3 < 4 then 1 < true else 3 - false evalto error by E-IfTError {
 - [ ] 結合の強弱はvariant型のコンストラクタ不等式で表現できそう
 - [ ] 自動テスト
     - [ ] 失敗したときの例外処理
+- [ ] poly/T-Timesではなく，T-Mult
