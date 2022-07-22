@@ -15,6 +15,7 @@ open System.Poly_typing_ml4.System
 %token CONS MATCH WITH VBAR
 %token CORON
 %token TINT TBOOL TLIST
+%token PRIME DOT
 %token EOL
 %start toplevel
 %type <judgement> toplevel
@@ -28,8 +29,19 @@ judgement:
 
 env:
     | { [] }
-    | ev=env COMMA x=VAR CORON t=type_ { (x, t) :: ev }
-    | x=VAR CORON t=type_ { [(x, t)] }
+    | ev=env COMMA x=VAR CORON t=tysc { (x, t) :: ev }
+    | x=VAR CORON t=tysc { [(x, t)] }
+
+tysc:
+    | vs=vars t=type_ { (vs, t) }
+
+vars:
+    | { [] }
+    | vs=vars_ DOT { vs }
+
+vars_:
+    | { [] }
+    | PRIME alpha=VAR vs=vars_ { to_var alpha :: vs }
 
 type_:
     | t1=list_type ARROW t2=type_ { T_fun(t1, t2) }
@@ -43,7 +55,7 @@ type_one:
     | TINT { T_int }
     | TBOOL { T_bool }
     | LPAREN t=type_ RPAREN { t }
-    | i=VINT { V i }
+    | PRIME alpha=VAR { V(to_var alpha) }
 
 exp:
     | l=lt_exp { l }

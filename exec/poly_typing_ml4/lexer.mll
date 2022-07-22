@@ -35,5 +35,7 @@ rule token = parse
     | "bool" { TBOOL }
     | "int" { TINT }
     | "list" { TLIST }
+    | "'" { PRIME }
+    | "." { DOT }
     | ['a'-'z']['a'-'z' '0'-'9']* { VAR (Lexing.lexeme lexbuf) }
     | eof      { raise Eof }
